@@ -1,0 +1,44 @@
+// Copyright 2013, The Toft Authors.
+// All rights reserved.
+//
+// Author: CHEN Feng <chen3feng@gmail.com>
+
+// Here we need to use descriptor.proto from Google Protobuf's source
+// code.  Usually, we should write
+//
+//  import "thirdparty/google/protobuf/descriptor.proto"
+//
+// However, because all Google's proto messages were defined within
+// the namespace google::protobuf, protoc would compile proto meta
+// data types into names like
+//
+//   protobuf_AddDesc_2fgoogle_2fprotobuf_2fdescriptor_2eproto.
+//
+// If we do import here with the prefix "thirdparty/", protoc would
+// consider that we are to use
+//
+//   protobuf_AddDesc_thirdparty_2fgoogle_2fprotobuf_2fdescriptor_2eproto
+//
+// So we must not have the "thirdparty/" prefix in import path.
+import "google/protobuf/descriptor.proto";
+
+package foxy;
+
+extend google.protobuf.ServiceOptions {
+    // Timeout in milliseconds, at service level.
+    optional int64 service_timeout = 1860 [default = 10000];
+}
+
+extend google.protobuf.MethodOptions {
+    // Timeout in milliseconds, at method level.
+    // It doesn't have a default value as method without method_timeout set would
+    // use service_timeout.
+    // Note: the protobuf compiler would generate a global variable for each
+    // defined option in current package. So two options can't share the same
+    // name even they belong to different options. We can't define a "timeout"
+    // option for both service and method.
+    optional int64 method_timeout = 1860;
+
+    optional string request_compress_type = 1861;
+    optional string response_compress_type = 1862;
+}

@@ -1,0 +1,43 @@
+// Copyright 2013, The Toft Authors.
+// All rights reserved.
+//
+// Author: CHEN Feng <chen3feng@gmail.com>
+
+import "foxy/rpc/error_code.proto";
+
+package foxy;
+
+message RpcMeta {
+    enum Type {
+        REQUEST = 1;
+        RESPONSE = 2;
+    };
+
+    // Field for request type
+    message Request {
+        // The fully-qualified name of the method, scope delimited by periods.
+        // It includes the full name of service.
+        optional string method_name = 1;
+        optional int64 timeout = 2;
+        // Caller expected compress type of response.
+        optional string expected_response_compress_type = 5;
+    }
+
+    // Field for response type
+    message Response {
+        // If the request failed.
+        optional bool failed = 1;
+        // If the request is canceled by client. If it's set, failed must be set too.
+        // Set the error code if failed.
+        optional RpcErrorCode error_code = 2;
+        // Set the reason if failed.
+        optional string reason = 3;
+    }
+
+    optional Type type = 1;
+    optional Request request = 2;   // Set if type == REQUEST
+    optional Response response = 3; // Set if type == RESPONSE
+
+    optional int64 sequence_id = 10;    // Allow out-of-order
+    optional string compress_type = 11; // The compress type of body.
+}

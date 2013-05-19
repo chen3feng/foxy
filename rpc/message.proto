@@ -1,0 +1,11 @@
+// Copyright 2013, The Toft Authors.
+// All rights reserved.
+//
+// Authors: CHEN Feng <chen3feng@gmail.com>
+//          Yongsong Liu <lyscsu@gmail.com>
+
+package foxy;
+
+message EmptyMessage {
+}
+

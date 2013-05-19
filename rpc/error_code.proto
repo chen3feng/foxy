@@ -1,0 +1,28 @@
+// Copyright 2013, The Toft Authors.
+// All rights reserved.
+//
+// Author: CHEN Feng <chen3feng@gmail.com>
+
+package foxy;
+
+enum RpcErrorCode {
+    RPC_SUCCESS = 0;
+    RPC_ERROR_PARSE_REQUEST_MESSAGE = 1;
+    RPC_ERROR_PARSE_RESPONSE_MESSAGE = 2;
+    RPC_ERROR_UNCOMPRESS_MESSAGE = 3;
+    RPC_ERROR_COMPRESS_TYPE = 4;
+    RPC_ERROR_METHOD_NAME = 5;
+    RPC_ERROR_FOUND_SERVICE = 6;
+    RPC_ERROR_FOUND_METHOD = 7;
+    RPC_ERROR_CHANNEL_SHUTDOWN = 8;
+    RPC_ERROR_CONNECTION_CLOSED = 9;
+    RPC_ERROR_REQUEST_TIMEOUT = 10; // Server health but timeout
+    RPC_ERROR_SERVER_UNAVAILABLE = 11; // Server not health
+    RPC_ERROR_SERVICE_UNREACHABLE = 12; // No service process listening on address
+    RPC_ERROR_SERVER_SHUTDOWN = 13;
+    RPC_ERROR_SEND_BUFFER_FULL = 14;
+    RPC_ERROR_NETWORK_UNREACHABLE = 15; // Can't access to host as network reason
+    RPC_ERROR_NO_AUTH = 16; // Not authenticated
+    RPC_ERROR_UNKNOWN = 999;
+    RPC_ERROR_FROM_USER = 1000;
+};
